@@ -24,3 +24,4 @@
 ### Список залежностей
 
 - vite-tsconfig-paths - (це потрібно щоб налаштувати Alias)
+- framer motion
