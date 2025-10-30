@@ -13,6 +13,7 @@ type ModalProps = {
 type ModalNane = "modal1" | "modal2" | null;
 
 import "./Modal.css";
+import useKeyEscape from "@shared/hooks/useKeyEscape/useKeyEscape";
 
 export default function Modal({
   isOpen,
@@ -28,20 +29,7 @@ export default function Modal({
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [onClose, isOpen]);
-
+  useKeyEscape(onClose, isOpen);
   useLockBodyScroll(shouldLockScroll);
   return (
     <Portal>
