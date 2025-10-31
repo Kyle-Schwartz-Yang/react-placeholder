@@ -32,12 +32,12 @@ export default function Modal({
   useKeyEscape(onClose, isOpen);
   useLockBodyScroll(shouldLockScroll);
   return (
-    <Portal>
-      <AnimatePresence
-        initial={false}
-        onExitComplete={() => setShouldLockScroll(false)}
-      >
-        {isOpen && (
+    <AnimatePresence
+      initial={false}
+      onExitComplete={() => setShouldLockScroll(false)}
+    >
+      {isOpen && (
+        <Portal>
           <motion.div key={activeModal} className="modal">
             <motion.div
               className="modal__overlay"
@@ -62,8 +62,8 @@ export default function Modal({
               </motion.div>
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </Portal>
+        </Portal>
+      )}
+    </AnimatePresence>
   );
 }
