@@ -40,6 +40,8 @@ export default function Modal({
         <Portal>
           <motion.div key={activeModal} className="modal">
             <motion.div
+              role="dialog"
+              aria-modal="true"
               className="modal__overlay"
               onClick={onClose}
               initial={{ opacity: 0 }}
