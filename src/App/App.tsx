@@ -1,7 +1,4 @@
-import {
-  useModalManager,
-  ModalProvider,
-} from "./context/ModalProvider/ModalProvider";
+import { useModalManager, ModalProvider } from "@app/context/ModalProvider";
 
 import "./App.css";
 
