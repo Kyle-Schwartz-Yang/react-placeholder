@@ -1,5 +1,11 @@
 # Counter Context with useReducer
 
+#### feature/counter-context
+
+- Звичайний counter, реалізація через Context API ( useReducer )
+- Має action.ts, reducer.ts
+- Функціонал: Increment, Decrement, Random
+
 > В цілому гарний варіант але треба буде прописувати типізацію руками
 
 - БУЛО 🔔
