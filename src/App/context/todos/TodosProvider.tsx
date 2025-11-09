@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 import { useLocalStorage } from "@shared/hooks/useLocalStorage/useLocalStorage";
 
 type TodosItemType = {
@@ -6,17 +6,52 @@ type TodosItemType = {
   text: string;
 };
 
-type TodosContextType = {
+type State = {
   todos: TodosItemType[];
-  setTodos: React.Dispatch<React.SetStateAction<TodosItemType[]>>;
+};
+
+type Action =
+  | { type: "CREATE"; payload: TodosItemType }
+  | { type: "DELETE"; payload: number };
+
+type TodosContextType = {
+  state: State;
+  dispatch: React.Dispatch<Action>;
   createTodo: (text: string) => void;
-  deleteTodo: (todoId: number) => void;
 };
 
 const TodosContext = createContext<TodosContextType | null>(null);
 
+// const initialSate = {
+//   todos: [],
+// };
+
+function todoReducer(state: State, action: Action) {
+  switch (action.type) {
+    case "CREATE":
+      return { ...state, todos: [action.payload, ...state.todos] };
+    case "DELETE":
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
+      };
+
+    default:
+      return state;
+  }
+}
+
 export function TodosProvider({ children }: { children: React.ReactNode }) {
-  const [todos, setTodos] = useLocalStorage<TodosItemType[]>("todos", []);
+  const [todosLS, setTodosLS] = useLocalStorage<TodosItemType[]>("todos", []);
+  const [state, dispatch] = useReducer(todoReducer, { todos: todosLS });
+
+  // useEffect(() => {
+  //   localStorage.clear();
+  // }, []);
+
+  useEffect(() => {
+    setTodosLS(state.todos);
+  }, [state.todos, setTodosLS]);
 
   const createTodo = (text: string) => {
     if (!text.trim()) return;
@@ -24,15 +59,11 @@ export function TodosProvider({ children }: { children: React.ReactNode }) {
       id: Date.now(),
       text: text.trim(),
     };
-    setTodos([...todos, newTodo]);
-  };
-
-  const deleteTodo = (todoId: number) => {
-    setTodos(todos.filter((item) => item.id !== todoId));
+    dispatch({ type: "CREATE", payload: newTodo });
   };
 
   return (
-    <TodosContext.Provider value={{ todos, setTodos, createTodo, deleteTodo }}>
+    <TodosContext.Provider value={{ state, dispatch, createTodo }}>
       {children}
     </TodosContext.Provider>
   );

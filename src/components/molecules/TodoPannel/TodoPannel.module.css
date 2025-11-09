@@ -1,0 +1,9 @@
+.pannel:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.button {
+  padding: 15px;
+  border: 2px solid white;
+  border-radius: 10%;
+}

@@ -5,3 +5,7 @@
   padding: 10px;
   border: 1px solid white;
 }
+
+.item:not(:last-child) {
+  margin-bottom: 30px;
+}
