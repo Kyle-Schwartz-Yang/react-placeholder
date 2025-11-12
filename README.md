@@ -1,6 +1,7 @@
 # Todos localStorage
 
 - TodoProvider: useReducer
+- ModalProvider
 - delete(modal), create(modal)
 - useInput, useLocalStorage, useLockBodyScroll, useKeyEscape
 - Modal[accessible], Potal
@@ -10,3 +11,4 @@
 - Можна зробити useReducer
 - Можна зробити декомпозицію по файлам TodoProvider
 - Можна додати новий функціонал
+- Можна доробити TodoPannel під ModalProvider
