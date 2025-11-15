@@ -1,23 +1,24 @@
-import { useState } from "react";
+import { useCounter } from "@app/store/CounterContext";
+
 import css from "./Counter.module.css";
 
 export function Counter() {
-  const [count, setCount] = useState(0);
+  const { state, dispatch } = useCounter();
 
   const onIncrement = () => {
-    setCount((с) => с + 1);
+    dispatch({ type: "INC" });
   };
 
   const onDecrement = () => {
-    setCount((с) => с - 1);
+    dispatch({ type: "DEC" });
   };
   const onReset = () => {
-    setCount(0);
+    dispatch({ type: "RESET" });
   };
 
   const onRandom = () => {
     const random = Math.floor(Math.random() * 100);
-    setCount(random);
+    dispatch({ type: "RND", payload: random });
   };
 
   return (
@@ -36,7 +37,7 @@ export function Counter() {
           Random
         </button>
       </div>
-      <div className={css.content}>{count}</div>
+      <div className={css.content}>{state.counter}</div>
     </div>
   );
 }
