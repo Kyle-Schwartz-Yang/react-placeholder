@@ -21,3 +21,8 @@ export function fetchPosts(page = 1) {
     }
   };
 }
+
+export const deletePost = (id: number) => ({
+  type: "DELETE_POST",
+  payload: id,
+});

@@ -1,6 +1,6 @@
 import { useAppSelector } from "@shared/hooks/useAppSelector/useAppSelector";
 import { useAppDispatch } from "@shared/hooks/useAppDispatch/useAppDispatch";
-import { fetchPosts } from "@app/store/posts/thunk";
+import { fetchPosts, deletePost } from "@app/store/posts/thunk";
 import css from "./Posts.module.css";
 
 export function Posts() {
@@ -26,6 +26,10 @@ export function Posts() {
 
   const handleFetch = () => {
     dispatch(fetchPosts());
+  };
+
+  const handleDelete = (id: number) => {
+    dispatch(deletePost(id));
   };
 
   return (
@@ -63,7 +67,11 @@ export function Posts() {
         ) : (
           <ul className={css.list}>
             {posts.map((item) => (
-              <li className={css.item} key={item.id}>
+              <li
+                className={css.item}
+                key={item.id}
+                onClick={() => handleDelete(item.id)}
+              >
                 {item.id}: {item.title}
               </li>
             ))}

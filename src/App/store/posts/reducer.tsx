@@ -16,6 +16,7 @@ export const ACTION = {
   FETCH_POSTS: "FETCH_POSTS",
   FETCH_POSTS_SUCCESS: "FETCH_POSTS_SUCCESS",
   FETCH_POSTS_ERROR: "FETCH_POSTS_ERROR",
+  DELETE_POST: "DELETE_POST",
 } as const;
 
 export type PostsAction =
@@ -24,8 +25,8 @@ export type PostsAction =
       type: typeof ACTION.FETCH_POSTS_SUCCESS;
       payload: { posts: PostItem[]; total: number; page: number };
     }
-  | { type: typeof ACTION.FETCH_POSTS_ERROR; payload: string };
-
+  | { type: typeof ACTION.FETCH_POSTS_ERROR; payload: string }
+  | { type: typeof ACTION.DELETE_POST; payload: number };
 const initialState: StatePosts = {
   posts: [],
   loading: false,
@@ -49,6 +50,11 @@ export function postsReducer(state = initialState, action: PostsAction) {
       };
     case ACTION.FETCH_POSTS_ERROR:
       return { ...state, loading: false, error: action.payload };
+    case ACTION.DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post.id !== action.payload),
+      };
     default:
       return state;
   }
