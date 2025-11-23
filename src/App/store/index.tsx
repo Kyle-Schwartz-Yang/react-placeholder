@@ -3,10 +3,12 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { thunk } from "redux-thunk";
 import { counterReducer } from "./counter/reducer";
 import { usersReducer } from "./users/reducer";
+import { postsReducer } from "./posts/reducer";
 
 export const rootReducer = combineReducers({
   users: usersReducer,
   counter: counterReducer,
+  posts: postsReducer,
 });
 
 // createStore вже lagacy, але для прикладу підійде

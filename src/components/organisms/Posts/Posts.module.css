@@ -1,0 +1,30 @@
+.items {
+  padding: 3rem 0rem;
+}
+
+.item {
+  padding: 1rem;
+  border: 1px solid white;
+  margin-bottom: 1rem;
+}
+
+.button {
+  border: 1px solid white;
+  padding: 1rem;
+}
+
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.pagination > button {
+  border: 1px solid white;
+  padding: 0.5rem 1rem;
+}
+
+.pagination > button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

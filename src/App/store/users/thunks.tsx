@@ -5,7 +5,7 @@ import {
 } from "./actions";
 import { type UsersAction } from "./types";
 import { type Dispatch } from "redux";
-import { api } from "@shared/api/users";
+import { api } from "@shared/api";
 
 export function fetchUsers() {
   return async (dispatch: Dispatch<UsersAction>) => {
@@ -14,7 +14,9 @@ export function fetchUsers() {
 
       const data = await api.getUsers();
 
-      dispatch(fetchUsersSuccessAction(data));
+      setTimeout(() => {
+        dispatch(fetchUsersSuccessAction(data));
+      }, 1000); // Імітація затримки
     } catch (error) {
       dispatch(fetchUsersErrorAction("ERROR FETCH USERS"));
     }

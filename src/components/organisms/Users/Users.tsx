@@ -11,8 +11,6 @@ import css from "./Users.module.css";
 
 export function Users() {
   const { users, loading, error } = useAppSelector((state) => state.users);
-  console.log(error);
-
   const dispatch = useAppDispatch();
 
   const handleFetch = () => {
