@@ -1,32 +1,6 @@
-type PostItem = {
-  id: number;
-  title: string;
-};
+import type { StatePosts, PostsAction } from "./posts.types";
+import { ACTION } from "./posts.constants";
 
-type StatePosts = {
-  posts: PostItem[];
-  loading: boolean;
-  error: string | null;
-  page: number;
-  total: number;
-  limit: number;
-};
-
-export const ACTION = {
-  FETCH_POSTS: "FETCH_POSTS",
-  FETCH_POSTS_SUCCESS: "FETCH_POSTS_SUCCESS",
-  FETCH_POSTS_ERROR: "FETCH_POSTS_ERROR",
-  DELETE_POST: "DELETE_POST",
-} as const;
-
-export type PostsAction =
-  | { type: typeof ACTION.FETCH_POSTS }
-  | {
-      type: typeof ACTION.FETCH_POSTS_SUCCESS;
-      payload: { posts: PostItem[]; total: number; page: number };
-    }
-  | { type: typeof ACTION.FETCH_POSTS_ERROR; payload: string }
-  | { type: typeof ACTION.DELETE_POST; payload: number };
 const initialState: StatePosts = {
   posts: [],
   loading: false,
